@@ -13,32 +13,36 @@
   }
   
   .glitch-text {
-    font-size: 4rem;
+    font-size: 2rem; /* Reduced text size */
     font-weight: 700;
     text-transform: uppercase;
     position: relative;
     color: var(--text-color);
+    display: inline-block; /* Ensure consistent alignment */
   }
   
   .glitch-text span {
     position: absolute;
     top: 0;
     left: 0;
+    width: 100%; /* Ensure spans align with the parent width */
+    text-align: center; /* Center-align the text */
   }
   
   .glitch-text span:first-child {
     clip-path: polygon(0 0, 100% 0, 100% 45%, 0 45%);
-    transform: translate(-0.025em, -0.0125em);
+    transform: translate(0, -0.05em); /* Fine-tuned positioning */
     opacity: 0.8;
     color: var(--primary-color);
   }
   
   .glitch-text span:last-child {
-    clip-path: polygon(0 80%, 100% 20%, 100% 100%, 0 100%);
-    transform: translate(0.025em, 0.0125em);
+    clip-path: polygon(0 55%, 100% 55%, 100% 100%, 0 100%);
+    transform: translate(0, 0.05em); /* Fine-tuned positioning */
     opacity: 0.8;
     color: var(--secondary-color);
   }
+  
   
   .subtitle {
     font-size: 1.5rem;
@@ -151,4 +155,100 @@
       transform: translateX(-50%) translateY(20px);
     }
   }
+  
+
+  @media screen and (max-width: 480px) {
+    body {
+      margin: 0;
+      padding: 0;
+    }
+  
+    .home {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: flex-start;
+      min-height: 100vh;
+      padding: 5rem 1rem 1rem; /* Add padding to prevent overlap with navbar */
+      text-align: center;
+      box-sizing: border-box; /* Ensure consistent sizing */
+    }
+  
+    .home-content {
+      max-width: 100%;
+      margin-bottom: 2rem; /* Add spacing between content and image */
+    }
+  
+      .glitch-text {
+        font-size: 1.5rem; /* Smaller size for mobile screens */
+      }
+    
+      .subtitle {
+        font-size: 0.9rem; /* Adjust subtitle size */
+      }
+    
+      .description {
+        font-size: 0.8rem; /* Adjust description size */
+      }
+    
+    
+    .subtitle {
+      font-size: 1rem; /* Smaller subtitle */
+      margin-top: 0.5rem;
+    }
+  
+    .description {
+      font-size: 0.85rem; /* Smaller text for better readability */
+      margin-top: 0.5rem;
+      line-height: 1.5;
+      max-width: 100%;
+    }
+  
+    .cta-button {
+      padding: 0.5rem 1.2rem; /* Adjust button size */
+      font-size: 0.85rem;
+      margin-top: 1rem;
+    }
+  
+    .home-image {
+      width: 100%; /* Use full width for the image */
+      max-width: 300px; /* Limit max size */
+      margin: 0 auto; /* Center the image */
+      margin-top: 1.5rem;
+    }
+  
+    .image-container img {
+      width: 100%; /* Ensure image scales properly */
+      height: auto;
+    }
+  
+    .scroll-indicator {
+      bottom: 1rem; /* Adjust position of the scroll indicator */
+    }
+  
+    .mouse {
+      width: 20px;
+      height: 35px; /* Adjust size of the scroll indicator */
+    }
+  
+    .mouse::before {
+      top: 6px; /* Adjust scroll dot position */
+    }
+  
+    nav {
+      position: fixed; /* Keep navbar fixed */
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 4rem; /* Adjust height as needed */
+      background-color: var(--background-color); /* Match background color */
+      z-index: 10; /* Ensure it stays above the content */
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 0 1rem;
+      box-shadow: 0px 2px 5px rgba(0, 0, 0, 0.1);
+    }
+  }
+  
   
