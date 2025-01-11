@@ -114,3 +114,56 @@
   .social-icon:hover {
     color: var(--primary-color);
   }
+
+
+  @media screen and (max-width: 480px) {
+    .contact-container {
+      flex-direction: column;
+      align-items: center;
+    }
+  
+    .contact-form {
+      width: 100%;
+      margin-bottom: 2rem;
+    }
+  
+    .form-group input,
+    .form-group textarea {
+      font-size: 0.9rem;
+      padding: 0.7rem;
+    }
+  
+    .form-group label {
+      font-size: 0.7rem;
+    }
+  
+    .submit-btn {
+      width: 100%;
+      font-size: 1rem;
+      padding: 0.8rem;
+    }
+  
+    .contact-info {
+      width: 100%;
+      text-align: center;
+    }
+  
+    .contact-info h3 {
+      font-size: 1.2rem;
+      margin-bottom: 1rem;
+    }
+  
+    .contact-info p {
+      font-size: 0.9rem;
+    }
+  
+    .social-links {
+      justify-content: center;
+      gap: 0.8rem;
+    }
+  
+    .social-icon {
+      font-size: 1.2rem;
+    }
+  }
+  
