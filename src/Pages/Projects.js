@@ -1,14 +1,15 @@
 import React from 'react';
 import Project1 from '../assets/project1.png'
 import Project2 from '../assets/project2.jpeg'
-import Project3 from '../assets/project3.png'
+import Project3 from '../assets/Project3.png'
 import './Projects.css';
 
 function Projects() {
   const projects = [
+    { title: 'In-Resturant Food Order Website', image: Project3, description: 'A full-stack MERN appliaction in which user can order food to their table..', link: 'https://github.com/princepatial/wazwanres' },
     { title: 'Netflix Clone', image: Project1, description: 'A full-stack MERN application for using firebase authentication.', link: 'https://netflixclone-myproject.vercel.app/' },
     { title: 'Cinema Reservation System', image: Project2, description: 'We can book tickets to the movies through the website.', link: 'https://github.com/princepatial/Cinema_Resevation_System' },
-    { title: 'Resturant Review Website', image: Project3, description: 'An analytics dashboard for review resturants near me.', link: 'https://github.com/princepatial/Resturant_Review_Website' },
+    
   ];
 
   return (
