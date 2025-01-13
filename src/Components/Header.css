@@ -85,42 +85,47 @@
   transform: scaleX(1);
 }
 
-/* Mobile responsiveness */
+.hamburger {
+  display: none; /* Hidden by default on desktop */
+}
+
+/* Update your media query */
 @media screen and (max-width: 480px) {
   .header {
     padding: 1rem;
   }
-
+  
   .nav ul {
-    display: none; /* Hide the nav links by default */
+    display: none;
     flex-direction: column;
     background-color: rgba(12, 12, 12, 0.95);
     position: absolute;
-    top: 100%; /* Place the dropdown below the header */
+    top: 100%;
     left: 0;
     right: 0;
     padding: 1rem 0;
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
   }
-
+  
+  .nav ul.active {
+    display: flex;
+  }
+  
   .nav ul li {
-    margin: 0.5rem 0; /* Add space between menu items */
+    margin: 0.5rem 0;
     text-align: center;
   }
-
-  .nav ul.active {
-    display: flex; /* Show nav links when active */
-  }
-
+  
+  /* Show hamburger menu on mobile */
   .hamburger {
-    display: block; /* Show the hamburger menu */
+    display: block;
     cursor: pointer;
     width: 30px;
     height: 25px;
     position: relative;
     z-index: 1100;
   }
-
+  
   .hamburger span {
     display: block;
     width: 100%;
@@ -129,16 +134,17 @@
     margin: 5px 0;
     transition: all 0.3s ease;
   }
-
+  
+  /* Hamburger animation */
   .hamburger.active span:nth-child(1) {
-    transform: translateY(10px) rotate(45deg);
+    transform: translateY(8px) rotate(45deg);
   }
-
+  
   .hamburger.active span:nth-child(2) {
     opacity: 0;
   }
-
+  
   .hamburger.active span:nth-child(3) {
-    transform: translateY(-10px) rotate(-45deg);
+    transform: translateY(-8px) rotate(-45deg);
   }
 }
