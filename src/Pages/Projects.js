@@ -1,6 +1,6 @@
 import React from 'react';
 import { FaGithub, FaExternalLinkAlt } from 'react-icons/fa';
-import { SiReact, SiNodedotjs, SiMongodb, SiFirebase, SiExpress } from 'react-icons/si';
+import { SiReact, SiNodedotjs, SiMongodb, SiExpress } from 'react-icons/si';
 import UGive from '../assets/UGive.png'
 import TalkBrush from '../assets/TalkBrush.png'
 import Church from '../assets/church.png'

@@ -1,6 +1,6 @@
 import React from 'react';
-import { SiMongodb, SiExpress, SiReact, SiNodedotjs, SiJavascript, SiFirebase, SiGit, SiRedux, SiTailwindcss, SiPostman } from 'react-icons/si';
-import { FaDatabase, FaCode } from 'react-icons/fa';
+import { SiMongodb, SiExpress, SiReact, SiNodedotjs, SiJavascript, SiGit, SiRedux, SiTailwindcss, SiPostman } from 'react-icons/si';
+import { FaDatabase } from 'react-icons/fa';
 import './Skills.css';
 
 function Skills() {
