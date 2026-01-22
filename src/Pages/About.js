@@ -1,5 +1,5 @@
 import React from 'react';
-import Profile from '../assets/me.jpg'
+import Profile from '../assets/main.jpeg'
 import './About.css';
 
 function About() {
@@ -11,15 +11,15 @@ function About() {
           <img src={Profile} alt="mypic" />
         </div>
         <div className="about-text">
-          <p>Hello! I'm Prince Patial, a passionate MERN stack developer with a keen eye for design and a love for creating seamless user experiences.</p>
-          <p>With expertise in MongoDB, Express.js, React, and Node.js, I bring ideas to life through clean, efficient code and intuitive interfaces.</p>
+          <p>I'm a Full-Stack Developer specializing in the MERN stack, transforming ideas into scalable web applications. I focus on writing clean code and creating intuitive user experiences that solve real problems.</p>
+          <p>When I'm not coding, I'm exploring new technologies and staying up-to-date with the latest web development trends.</p>
           <div className="about-stats">
             <div className="stat">
-              <span className="stat-number">1</span>
+              <span className="stat-number">2</span>
               <span className="stat-label">Years Experience</span>
             </div>
             <div className="stat">
-              <span className="stat-number">5+</span>
+              <span className="stat-number">10+</span>
               <span className="stat-label">Projects Completed</span>
             </div>
           </div>

@@ -1,29 +1,30 @@
 import React from 'react';
+import { SiMongodb, SiExpress, SiReact, SiNodedotjs, SiJavascript, SiFirebase, SiGit, SiRedux, SiTailwindcss, SiPostman } from 'react-icons/si';
+import { FaDatabase, FaCode } from 'react-icons/fa';
 import './Skills.css';
 
 function Skills() {
   const skills = [
-    { name: 'MongoDB', level: 90 },
-    { name: 'Express.js', level: 85 },
-    { name: 'React', level: 95 },
-    { name: 'Node.js', level: 88 },
-    { name: 'JavaScript', level: 92 },
-    { name: 'HTML/CSS', level: 90 },
+    { name: 'React.js', icon: <SiReact /> },
+    { name: 'Node.js', icon: <SiNodedotjs /> },
+    { name: 'Express.js', icon: <SiExpress /> },
+    { name: 'MongoDB', icon: <SiMongodb /> },
+    { name: 'JavaScript', icon: <SiJavascript /> },
+    { name: 'Redux', icon: <SiRedux /> },
+    { name: 'Git & GitHub', icon: <SiGit /> },
+    { name: 'Tailwind CSS', icon: <SiTailwindcss /> },
+    { name: 'RESTful APIs', icon: <FaDatabase /> },
+    { name: 'Postman', icon: <SiPostman /> },
   ];
 
   return (
     <div className="skills">
-      <h2 className="section-title">My Skills</h2>
-      <div className="skills-container">
+      <h2 className="section-title">Technologies I Work With</h2>
+      <div className="skills-grid">
         {skills.map((skill, index) => (
-          <div key={index} className="skill">
-            <div className="skill-info">
-              <span className="skill-name">{skill.name}</span>
-              <span className="skill-percentage">{skill.level}%</span>
-            </div>
-            <div className="skill-bar-container">
-              <div className="skill-bar" style={{width: `${skill.level}%`}}></div>
-            </div>
+          <div key={index} className="skill-card">
+            <span className="skill-icon">{skill.icon}</span>
+            <span className="skill-name">{skill.name}</span>
           </div>
         ))}
       </div>

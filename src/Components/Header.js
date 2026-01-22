@@ -1,8 +1,7 @@
 import React, { useState, useEffect } from 'react';
-import { Link } from 'react-router-dom';
 import './Header.css';
 
-function Header() {
+function Header({ refs }) {
   const [isScrolled, setIsScrolled] = useState(false);
   const [isMenuOpen, setIsMenuOpen] = useState(false);
 
@@ -18,15 +17,19 @@ function Header() {
     setIsMenuOpen(!isMenuOpen);
   };
 
+  const scrollToSection = (ref) => {
+    ref.current?.scrollIntoView({ behavior: 'smooth' });
+    setIsMenuOpen(false);
+  };
+
   return (
     <header className={`header ${isScrolled ? 'scrolled' : ''}`}>
       <div className="logo">
-        <span className="logo-text">PRINCE</span>
+        <span className="logo-text">&lt;DEV/&gt;</span>
       </div>
-      
-      {/* Hamburger Menu Button */}
-      <div 
-        className={`hamburger ${isMenuOpen ? 'active' : ''}`} 
+
+      <div
+        className={`hamburger ${isMenuOpen ? 'active' : ''}`}
         onClick={toggleMenu}
       >
         <span></span>
@@ -36,11 +39,11 @@ function Header() {
 
       <nav className="nav">
         <ul className={isMenuOpen ? 'active' : ''}>
-          <li><Link to="/" onClick={() => setIsMenuOpen(false)}>Home</Link></li>
-          <li><Link to="/about" onClick={() => setIsMenuOpen(false)}>About</Link></li>
-          <li><Link to="/skills" onClick={() => setIsMenuOpen(false)}>Skills</Link></li>
-          <li><Link to="/projects" onClick={() => setIsMenuOpen(false)}>Projects</Link></li>
-          <li><Link to="/contact" onClick={() => setIsMenuOpen(false)}>Contact</Link></li>
+          <li><button onClick={() => scrollToSection(refs.home)}>Home</button></li>
+          <li><button onClick={() => scrollToSection(refs.about)}>About</button></li>
+          <li><button onClick={() => scrollToSection(refs.skills)}>Skills</button></li>
+          <li><button onClick={() => scrollToSection(refs.projects)}>Projects</button></li>
+          <li><button onClick={() => scrollToSection(refs.contact)}>Contact</button></li>
         </ul>
       </nav>
     </header>
