@@ -1,10 +1,10 @@
 import React, { useRef } from 'react';
-import Header from './Components/Header';
-import Home from './Pages/Home';
-import About from './Pages/About';
-import Skills from './Pages/Skills';
-import Projects from './Pages/Projects';
-import Contact from './Pages/Contact';
+import Header from './Components/Header.js';
+import Home from './Pages/Home.js';
+import About from './Pages/About.js';
+import Skills from './Pages/Skills.js';
+import Projects from './Pages/Projects.js';
+import Contact from './Pages/Contact.js';
 import './App.css';
 
 function App() {
