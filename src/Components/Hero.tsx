@@ -1,130 +1,128 @@
 import { motion } from 'framer-motion';
-import { ArrowDown, Link2, GitBranch } from 'lucide-react';
+
+// Shared easing for all section reveals
+const ease = [0.25, 0.1, 0.25, 1] as const;
+
+const fadeUp = (delay = 0) => ({
+  initial: { opacity: 0, y: 18 },
+  animate: { opacity: 1, y: 0 },
+  transition: { duration: 0.55, delay, ease },
+});
+
+const focusAreas = ['Full-Stack', 'Frontend', 'Backend', 'Systems'];
 
 export default function Hero() {
   return (
-    <section id="hero" className="min-h-screen flex items-center pt-16 pb-24 px-6">
+    <section
+      id="hero"
+      className="pt-24 md:pt-28 pb-20 px-6"
+    >
       <div className="max-w-6xl mx-auto w-full">
-        <div className="grid lg:grid-cols-2 gap-16 items-center">
+        <div className="grid lg:grid-cols-[1fr_auto] gap-14 lg:gap-24 items-center">
 
-          {/* Text column */}
-          <div>
+          {/* — Main column — */}
+          <div className="max-w-[42rem]">
+
+            {/* Eyebrow */}
             <motion.p
-              initial={{ opacity: 0, y: 16 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.5, delay: 0.1 }}
-              className="text-accent text-xs font-semibold tracking-widest uppercase mb-6"
+              {...fadeUp(0.05)}
+              className="label-caps text-subtle mb-8"
             >
-              Full-Stack Developer
+              Full-Stack Developer · Product Engineer
             </motion.p>
 
+            {/* Headline */}
             <motion.h1
-              initial={{ opacity: 0, y: 20 }}
+              initial={{ opacity: 0, y: 22 }}
               animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.6, delay: 0.2 }}
-              className="text-5xl md:text-[4.5rem] font-bold text-text leading-[1.05] tracking-tight mb-6"
+              transition={{ duration: 0.65, delay: 0.15, ease }}
+              className="text-display font-bold text-text mb-6"
             >
-              Prince
+              I build products,
               <br />
-              Patial<span className="text-accent">.</span>
+              not just interfaces.
             </motion.h1>
 
+            {/* Supporting copy */}
             <motion.p
-              initial={{ opacity: 0, y: 16 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.5, delay: 0.3 }}
-              className="text-muted text-base md:text-lg leading-relaxed max-w-md mb-10"
+              {...fadeUp(0.3)}
+              className="text-muted text-[1.0625rem] leading-[1.75] max-w-[540px] mb-10"
             >
-              I build scalable, production-ready web applications — from database architecture to pixel-perfect interfaces. Specializing in the MERN stack with a focus on clean code and intuitive UX.
+              I'm Prince Patial — a full-stack developer based in India.
+              I build production-ready digital products across frontend, backend,
+              data, and infrastructure. From the first screen to deployment.
             </motion.p>
 
+            {/* CTAs */}
             <motion.div
-              initial={{ opacity: 0, y: 16 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.5, delay: 0.4 }}
-              className="flex flex-wrap gap-3 mb-12"
+              {...fadeUp(0.42)}
+              className="flex flex-wrap items-center gap-4 mb-10"
             >
               <a
                 href="#projects"
-                className="px-5 py-2.5 bg-accent text-white text-sm font-medium rounded-md hover:bg-accent-dim transition-colors duration-200"
+                className="inline-flex items-center gap-2 px-5 py-2.5 bg-text text-bg text-sm font-medium rounded hover:bg-muted transition-all duration-200 group"
               >
-                View Projects
+                View my work
+                <span className="text-subtle transition-transform duration-200 group-hover:translate-y-0.5" aria-hidden="true">↓</span>
               </a>
               <a
                 href="#contact"
-                className="px-5 py-2.5 border border-border text-text text-sm font-medium rounded-md hover:border-accent/60 hover:text-accent transition-all duration-200"
+                className="inline-flex items-center gap-2 px-5 py-2.5 border border-border-dark text-text text-sm font-medium rounded hover:border-muted hover:text-muted transition-all duration-200"
               >
-                Get in Touch
-              </a>
-              <a
-                href="/PrinceResume.pdf"
-                download
-                className="px-5 py-2.5 text-muted text-sm font-medium rounded-md hover:text-text transition-colors duration-200 flex items-center gap-1.5"
-              >
-                <ArrowDown size={13} />
-                Resume
+                Let's talk
               </a>
             </motion.div>
 
+            {/* Social / meta */}
             <motion.div
               initial={{ opacity: 0 }}
               animate={{ opacity: 1 }}
-              transition={{ duration: 0.5, delay: 0.55 }}
-              className="flex items-center gap-5"
+              transition={{ duration: 0.5, delay: 0.58 }}
+              className="flex flex-wrap items-center gap-5"
             >
-              <div className="h-px w-8 bg-border" />
+              <span className="label-caps text-subtle">Based in India</span>
+              <span className="hidden sm:block w-px h-3 bg-border-dark" aria-hidden="true" />
               <a
                 href="https://github.com/princepatial"
                 target="_blank"
                 rel="noopener noreferrer"
-                className="flex items-center gap-1.5 text-muted text-sm hover:text-text transition-colors"
+                className="label-caps text-muted hover:text-text transition-colors link-underline"
               >
-                <GitBranch size={14} />
                 GitHub
               </a>
               <a
                 href="https://www.linkedin.com/in/princepatial/"
                 target="_blank"
                 rel="noopener noreferrer"
-                className="flex items-center gap-1.5 text-muted text-sm hover:text-text transition-colors"
+                className="label-caps text-muted hover:text-text transition-colors link-underline"
               >
-                <Link2 size={14} />
                 LinkedIn
+              </a>
+              <a
+                href="/PrinceResume.pdf"
+                download
+                className="label-caps text-muted hover:text-text transition-colors link-underline"
+              >
+                Resume ↓
               </a>
             </motion.div>
           </div>
 
-          {/* Photo column */}
+          {/* — Editorial detail column — typography and rules only, no card, no photo — */}
           <motion.div
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.7, delay: 0.35 }}
-            className="flex justify-center lg:justify-end"
+            {...fadeUp(0.5)}
+            className="lg:w-[220px] pt-10 lg:pt-0 border-t lg:border-t-0 lg:border-l border-border lg:pl-10"
           >
-            <div className="relative">
-              {/* Decorative border rings */}
-              <div className="absolute -inset-[10px] rounded-[22px] border border-accent/15 pointer-events-none" />
-              <div className="absolute -inset-[20px] rounded-[28px] border border-border/40 pointer-events-none" />
-
-              {/* Photo */}
-              <div className="relative w-64 h-64 sm:w-72 sm:h-72 lg:w-80 lg:h-80 rounded-2xl overflow-hidden bg-card">
-                <img
-                  src="/Prince.png"
-                  alt="Prince Patial — Full-Stack Developer"
-                   className="w-full h-full object-cover object-top scale-60"
-                />
-                <div className="absolute inset-0 bg-gradient-to-t from-bg/30 via-transparent to-transparent pointer-events-none" />
-              </div>
-
-              {/* Floating status chip */}
-              <div className="absolute -bottom-3 left-4 bg-card border border-border rounded-lg px-4 py-2.5 shadow-lg shadow-bg/50">
-                <div className="flex items-center gap-2">
-                  <span className="w-1.5 h-1.5 rounded-full bg-green-400 animate-pulse" />
-                  <p className="text-xs text-muted">Open to opportunities</p>
-                </div>
-                <p className="text-sm text-text font-semibold mt-0.5">2+ yrs · MERN stack</p>
-              </div>
-            </div>
+            <p className="label-caps text-subtle mb-4">Currently</p>
+            <p className="text-text text-[1.0625rem] leading-[1.5] font-medium mb-8 max-w-[220px]">
+              Building production-ready digital products.
+            </p>
+            <div className="h-px w-10 bg-border-dark mb-8" aria-hidden="true" />
+            <ul className="space-y-2" role="list">
+              {focusAreas.map((item) => (
+                <li key={item} className="label-caps text-muted">{item}</li>
+              ))}
+            </ul>
           </motion.div>
 
         </div>

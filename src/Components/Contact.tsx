@@ -1,168 +1,189 @@
 import { useState } from 'react';
 import { motion } from 'framer-motion';
-import { Mail, Link2, GitBranch, ArrowDown, Send } from 'lucide-react';
-import SectionHeader from './SectionHeader';
-
-const contactLinks = [
-  {
-    icon: <Mail size={15} />,
-    label: 'Email',
-    display: 'princepatial20@gmail.com',
-    href: 'mailto:princepatial20@gmail.com',
-  },
-  {
-    icon: <Link2 size={15} />,
-    label: 'LinkedIn',
-    display: '/in/princepatial',
-    href: 'https://www.linkedin.com/in/princepatial/',
-  },
-  {
-    icon: <GitBranch size={15} />,
-    label: 'GitHub',
-    display: '/princepatial',
-    href: 'https://github.com/princepatial',
-  },
-];
-
-const inputBase =
-  'w-full bg-bg border border-border rounded-lg px-4 py-3 text-text text-sm placeholder:text-subtle focus:outline-none focus:border-accent/60 transition-colors duration-200';
 
 export default function Contact() {
-  const [form, setForm] = useState({ name: '', email: '', message: '' });
-  const [status, setStatus] = useState<'idle' | 'sending' | 'success' | 'error'>('idle');
+  const [isSubmitting, setIsSubmitting] = useState(false);
+  const [submitStatus, setSubmitStatus] = useState<'idle' | 'success' | 'error'>('idle');
 
-  const onChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) =>
-    setForm({ ...form, [e.target.name]: e.target.value });
-
-  const onSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
+  const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
-    setStatus('sending');
-    const fd = new FormData(e.currentTarget);
-    fd.append('access_key', '3347ee3a-ab5e-4bf2-a10a-a00cced9859f');
+    setIsSubmitting(true);
+    setSubmitStatus('idle');
+
+    const form = e.currentTarget;
+    const formData = new FormData(form);
+
     try {
-      const res = await fetch('https://api.web3forms.com/submit', { method: 'POST', body: fd });
-      const data = await res.json();
-      setStatus(data.success ? 'success' : 'error');
-      if (data.success) setForm({ name: '', email: '', message: '' });
+      const response = await fetch('https://api.web3forms.com/submit', {
+        method: 'POST',
+        body: formData,
+      });
+
+      if (response.ok) {
+        setSubmitStatus('success');
+        form.reset();
+      } else {
+        setSubmitStatus('error');
+      }
     } catch {
-      setStatus('error');
+      setSubmitStatus('error');
+    } finally {
+      setIsSubmitting(false);
     }
   };
 
   return (
-    <section id="contact" className="py-28 px-6">
-      <div className="max-w-6xl mx-auto">
-        <SectionHeader
-          eyebrow="Contact"
-          title="Let's Work Together"
-          subtitle="Whether you have a project in mind or just want to talk — my inbox is open."
-        />
+    <section id="contact" className="py-24 md:py-32 px-6 bg-surface">
+      <div className="max-w-6xl mx-auto border-t border-border pt-24">
+        
+        <div className="grid lg:grid-cols-2 gap-16 lg:gap-24">
+          
+          {/* Left — Messaging & Form */}
+          <div>
+            <motion.p 
+              initial={{ opacity: 0, y: 16 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
+              transition={{ duration: 0.5, ease: [0.25, 0.1, 0.25, 1] }}
+              className="label-caps mb-6"
+            >
+              Contact
+            </motion.p>
+            
+            <motion.h2 
+              initial={{ opacity: 0, y: 16 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
+              transition={{ duration: 0.5, delay: 0.1, ease: [0.25, 0.1, 0.25, 1] }}
+              className="text-3xl md:text-[2.75rem] leading-[1.15] font-bold text-text mb-6 tracking-tight"
+            >
+              Let's build something<br />worth using.
+            </motion.h2>
+            
+            <motion.p 
+              initial={{ opacity: 0, y: 16 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
+              transition={{ duration: 0.5, delay: 0.2, ease: [0.25, 0.1, 0.25, 1] }}
+              className="text-muted text-[1.0625rem] mb-12 max-w-md"
+            >
+              Have a project in mind? Let's talk. I'm open to full-time roles, freelance work, and interesting collaborations.
+            </motion.p>
 
-        <div className="grid lg:grid-cols-5 gap-10 lg:gap-16">
-          {/* Form */}
-          <motion.div
-            initial={{ opacity: 0, y: 20 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
-            transition={{ duration: 0.5 }}
-            className="lg:col-span-3"
-          >
-            <form onSubmit={onSubmit} className="space-y-4">
-              <div className="grid sm:grid-cols-2 gap-4">
-                <div>
-                  <label htmlFor="name" className="block text-xs font-medium text-muted mb-1.5">Name</label>
-                  <input
-                    id="name" name="name" type="text" required
-                    placeholder="Your name"
-                    value={form.name} onChange={onChange}
-                    className={inputBase}
-                  />
-                </div>
-                <div>
-                  <label htmlFor="email" className="block text-xs font-medium text-muted mb-1.5">Email</label>
-                  <input
-                    id="email" name="email" type="email" required
-                    placeholder="you@example.com"
-                    value={form.email} onChange={onChange}
-                    className={inputBase}
-                  />
-                </div>
-              </div>
-
-              <div>
-                <label htmlFor="message" className="block text-xs font-medium text-muted mb-1.5">Message</label>
-                <textarea
-                  id="message" name="message" required rows={6}
-                  placeholder="Tell me about your project or just say hello…"
-                  value={form.message} onChange={onChange}
-                  className={`${inputBase} resize-none`}
+            <motion.form 
+              initial={{ opacity: 0, y: 16 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
+              transition={{ duration: 0.5, delay: 0.3, ease: [0.25, 0.1, 0.25, 1] }}
+              onSubmit={handleSubmit} 
+              className="space-y-8"
+            >
+              {/* Web3Forms Access Key */}
+              <input type="hidden" name="access_key" value="68c740a8-b6ff-4bd2-97cc-9e198642a8b3" />
+              
+              <div className="relative">
+                <label htmlFor="name" className="label-caps block mb-2">Name</label>
+                <input
+                  type="text"
+                  id="name"
+                  name="name"
+                  required
+                  placeholder="Your name"
+                  className="w-full bg-transparent border-b border-border py-3 text-text placeholder:text-border-dark focus:border-accent focus:outline-none transition-colors duration-200"
                 />
               </div>
 
-              <div className="flex items-center gap-4 pt-1">
-                <button
-                  type="submit"
-                  disabled={status === 'sending'}
-                  className="flex items-center gap-2 px-5 py-2.5 bg-accent text-white text-sm font-medium rounded-md hover:bg-accent-dim disabled:opacity-50 transition-colors duration-200"
-                >
-                  <Send size={13} />
-                  {status === 'sending' ? 'Sending…' : 'Send Message'}
-                </button>
-
-                {status === 'success' && (
-                  <span className="text-green-400 text-sm">Sent successfully!</span>
-                )}
-                {status === 'error' && (
-                  <span className="text-red-400 text-sm">Failed — try email directly.</span>
-                )}
+              <div className="relative">
+                <label htmlFor="email" className="label-caps block mb-2">Email</label>
+                <input
+                  type="email"
+                  id="email"
+                  name="email"
+                  required
+                  placeholder="you@example.com"
+                  className="w-full bg-transparent border-b border-border py-3 text-text placeholder:text-border-dark focus:border-accent focus:outline-none transition-colors duration-200"
+                />
               </div>
-            </form>
-          </motion.div>
 
-          {/* Contact info */}
-          <motion.div
-            initial={{ opacity: 0, y: 20 }}
+              <div className="relative">
+                <label htmlFor="message" className="label-caps block mb-2">Message</label>
+                <textarea
+                  id="message"
+                  name="message"
+                  required
+                  rows={4}
+                  placeholder="Tell me about your project or just say hello..."
+                  className="w-full bg-transparent border-b border-border py-3 text-text placeholder:text-border-dark focus:border-accent focus:outline-none transition-colors duration-200 resize-y"
+                />
+              </div>
+
+              <button
+                type="submit"
+                disabled={isSubmitting}
+                className="inline-flex items-center justify-center px-6 py-3 bg-text text-bg text-sm font-medium rounded hover:bg-muted transition-colors duration-200 disabled:opacity-50 disabled:cursor-not-allowed"
+              >
+                {isSubmitting ? 'Sending...' : 'Send message'}
+              </button>
+
+              {submitStatus === 'success' && (
+                <p className="text-sm text-green-700 mt-4 font-medium" role="alert">
+                  Thank you. Your message has been sent successfully.
+                </p>
+              )}
+              {submitStatus === 'error' && (
+                <p className="text-sm text-red-700 mt-4 font-medium" role="alert">
+                  Something went wrong. Please try emailing me directly.
+                </p>
+              )}
+            </motion.form>
+          </div>
+
+          {/* Right — Details */}
+          <motion.div 
+            initial={{ opacity: 0, y: 16 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
-            transition={{ duration: 0.5, delay: 0.12 }}
-            className="lg:col-span-2 flex flex-col gap-3"
+            transition={{ duration: 0.5, delay: 0.4, ease: [0.25, 0.1, 0.25, 1] }}
+            className="lg:pt-[7.5rem] space-y-12"
           >
-            {contactLinks.map((item) => (
-              <a
-                key={item.label}
-                href={item.href}
-                target={item.href.startsWith('mailto') ? undefined : '_blank'}
-                rel="noopener noreferrer"
-                className="flex items-center gap-3 bg-card border border-border rounded-xl p-4 hover:border-accent/30 transition-colors duration-200 group"
-              >
-                <div className="w-8 h-8 flex items-center justify-center bg-bg border border-border rounded-lg text-muted group-hover:text-accent group-hover:border-accent/30 transition-colors shrink-0">
-                  {item.icon}
+            <div className="space-y-8">
+              {[
+                { label: 'EMAIL', value: 'princepatial20@gmail.com', href: 'mailto:princepatial20@gmail.com' },
+                { label: 'LINKEDIN', value: '/in/princepatial', href: 'https://www.linkedin.com/in/princepatial/' },
+                { label: 'GITHUB', value: '/princepatial', href: 'https://github.com/princepatial' },
+              ].map((item) => (
+                <div key={item.label}>
+                  <p className="label-caps mb-1">{item.label}</p>
+                  <a 
+                    href={item.href}
+                    target="_blank"
+                    rel="noopener noreferrer" 
+                    className="text-[1.0625rem] text-text hover:text-accent transition-colors link-underline font-medium"
+                  >
+                    {item.value}
+                  </a>
                 </div>
-                <div className="min-w-0">
-                  <p className="text-xs text-muted mb-0.5">{item.label}</p>
-                  <p className="text-sm text-text font-medium truncate">{item.display}</p>
-                </div>
-              </a>
-            ))}
-
-            <a
-              href="/PrinceResume.pdf"
-              download
-              className="flex items-center gap-3 bg-accent/5 border border-accent/20 rounded-xl p-4 hover:bg-accent/10 transition-colors duration-200 mt-1"
-            >
-              <div className="w-8 h-8 flex items-center justify-center bg-accent/10 border border-accent/30 rounded-lg text-accent shrink-0">
-                <ArrowDown size={15} />
-              </div>
+              ))}
+              
               <div>
-                <p className="text-xs text-muted mb-0.5">Resume</p>
-                <p className="text-sm text-accent font-medium">Download PDF</p>
+                <p className="label-caps mb-1">RESUME</p>
+                <a 
+                  href="/PrinceResume.pdf" 
+                  download
+                  className="text-[1.0625rem] text-text hover:text-accent transition-colors link-underline font-medium inline-flex items-center gap-1"
+                >
+                  Download PDF <span className="text-subtle text-sm">↓</span>
+                </a>
               </div>
-            </a>
+            </div>
 
-            <p className="text-xs text-subtle mt-2 leading-relaxed">
-              Based in Himachal Pradesh, India — available globally for remote work.
-            </p>
+            <div className="pt-8 border-t border-border">
+              <p className="label-caps text-subtle">
+                BASED IN HIMACHAL PRADESH, INDIA · AVAILABLE GLOBALLY
+              </p>
+            </div>
           </motion.div>
+
         </div>
       </div>
     </section>

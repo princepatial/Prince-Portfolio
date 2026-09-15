@@ -1,74 +1,71 @@
 import { motion } from 'framer-motion';
 import SectionHeader from './SectionHeader';
 
-const categories = [
+const skillsData = [
   {
-    label: 'Frontend',
-    color: 'text-blue-400',
-    skills: ['React.js', 'Next.js', 'TypeScript', 'Tailwind CSS', 'Redux Toolkit', 'TanStack Query', 'Framer Motion', 'Shadcn/UI'],
+    category: 'Frontend',
+    skills: ['React.js', 'Next.js', 'TypeScript', 'Tailwind CSS', 'Redux Toolkit', 'TanStack Query', 'Framer Motion', 'shadcn/ui'],
   },
   {
-    label: 'Backend',
-    color: 'text-emerald-400',
+    category: 'Backend',
     skills: ['Node.js', 'Express.js', 'REST APIs', 'GraphQL', 'Socket.IO', 'JWT Auth'],
   },
   {
-    label: 'Databases',
-    color: 'text-amber-400',
+    category: 'Data',
     skills: ['MongoDB', 'PostgreSQL', 'Prisma ORM', 'Redis'],
   },
   {
-    label: 'Cloud & DevOps',
-    color: 'text-purple-400',
+    category: 'Infrastructure',
     skills: ['Docker', 'AWS', 'Vercel', 'Nginx', 'GitHub Actions'],
   },
   {
-    label: 'AI & Automation',
-    color: 'text-rose-400',
+    category: 'AI & Automation',
     skills: ['OpenAI API', 'Google Gemini API', 'n8n Automation'],
   },
   {
-    label: 'Tools',
-    color: 'text-cyan-400',
+    category: 'Tools',
     skills: ['Git', 'GitHub', 'Postman', 'Figma', 'VS Code'],
   },
 ];
 
 export default function Skills() {
   return (
-    <section id="skills" className="py-28 px-6 bg-surface/30">
+    <section id="skills" className="py-section px-6">
       <div className="max-w-6xl mx-auto">
         <SectionHeader
-          eyebrow="Skills"
-          title="What I Work With"
-          subtitle="A full-stack toolkit built across production projects — not just tutorials."
+          eyebrow="Capabilities"
+          title="Skills"
         />
 
-        <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-px bg-border rounded-2xl overflow-hidden border border-border">
-          {categories.map((cat, ci) => (
+        <div className="mt-12">
+          {skillsData.map((section, index) => (
             <motion.div
-              key={cat.label}
-              initial={{ opacity: 0 }}
-              whileInView={{ opacity: 1 }}
-              viewport={{ once: true }}
-              transition={{ duration: 0.4, delay: ci * 0.06 }}
-              className="bg-card p-6 hover:bg-card/80 transition-colors duration-200"
+              key={section.category}
+              initial={{ opacity: 0, y: 12 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true, margin: '-8%' }}
+              transition={{ duration: 0.4, delay: index * 0.05, ease: [0.25, 0.1, 0.25, 1] }}
+              className="group grid md:grid-cols-[200px_1fr] gap-4 md:gap-8 items-start py-8 border-t border-border hover:border-accent/30 transition-colors duration-300"
             >
-              <p className={`text-xs font-semibold tracking-widest uppercase mb-4 ${cat.color}`}>
-                {cat.label}
-              </p>
-              <div className="flex flex-wrap gap-2">
-                {cat.skills.map((skill) => (
-                  <span
+              <div className="flex items-center gap-4 pt-1">
+                <span className="label-caps text-border-dark group-hover:text-accent/50 transition-colors">0{index + 1}</span>
+                <h3 className="text-sm font-semibold tracking-wide uppercase text-text">{section.category}</h3>
+              </div>
+              
+              <ul className="flex flex-wrap gap-x-6 gap-y-3" role="list">
+                {section.skills.map((skill) => (
+                  <li 
                     key={skill}
-                    className="text-xs px-2.5 py-1 rounded-md bg-bg border border-border text-muted hover:text-text hover:border-subtle transition-colors duration-150 cursor-default"
+                    className="text-[1.0625rem] text-muted group-hover:text-text transition-colors duration-200"
                   >
                     {skill}
-                  </span>
+                  </li>
                 ))}
-              </div>
+              </ul>
             </motion.div>
           ))}
+          {/* Closing rule */}
+          <div className="border-t border-border" />
         </div>
       </div>
     </section>
